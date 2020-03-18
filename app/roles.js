@@ -24,6 +24,8 @@ ac.grant("admin")
  .deleteAny("worker")
  .updateAny("work")
  .deleteAny("work")
+ .updateAny("workhours")
+ .deleteAny("workhours")
 
 return ac;
 })();

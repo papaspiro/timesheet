@@ -33,6 +33,9 @@ module.exports = (sequelize,Sequelize) => {
  }
 );
 
+Worker.associate = (models) => {
+    Worker.hasMany(models.Workhours,{foreignKey: "worker_id"});
+  };
 
 return Worker;
 }

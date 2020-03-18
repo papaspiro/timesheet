@@ -1,4 +1,4 @@
-const bodyParser = require("body-parser");
+bodyParser = require("body-parser");
 const express = require('express');
 const cors = require('cors');
 
@@ -27,30 +27,50 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const db = require("./app/models");
-//db.sequelize.sync();
 
-
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Re -Syncing");
+// Handle 404
+/*
+app.use(function(err,req, res) {
+  res.status.json()
+    if (err.statusCode === 400 ){
+      err.status.json({
+        code:400,
+        message: "Resource not found"
+      });
+    }
 });
 
-//Associations
-db.workhours.belongsTo(db.worker);
-db.worker.hasMany(db.workhours);
+*/
+const db = require("./app/models");
+db.sequelize.sync();
 
-db.workhours.belongsTo(db.work);
-db.work.hasMany(db.workhours)
+//*
+//db.sequelize.sync({ force: true }).then(() => {
+  //console.log("Re -Syncing");
+//});
+
+//Associations
+//db.workhours.belongsTo(db.worker);
+//db.worker.hasMany(db.workhours);
+
+//db.workhours.belongsTo(db.work);
+//db.work.hasMany(db.workhours)
+
+
+
 
 
 require("./app/routes/user.routes.js")(app);
 require("./app/routes/work.routes.js")(app);
 require("./app/routes/worker.routes.js")(app);
 require("./app/routes/workhours.routes.js")(app);
+require("./app/routes/dashboard.routes.js")(app);
+
 
 
 
 const PORT = process.env.PORT || 1888;
 app.listen(PORT, () => {
   console.log('Up and running');
+
 });

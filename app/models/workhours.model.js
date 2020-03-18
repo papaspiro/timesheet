@@ -42,15 +42,12 @@ Comment.associate = function(models) {
     as: 'post'
   });
 };
-
-
-
-
+*/
 
 WorkHours.associate = (models) => {
-  WorkHours.belongsTo(models.Worker);
-  WorkHours.belongsTo(work.worker);
-};*/
+  WorkHours.belongsTo(models.Worker,{foreignKey: "worker_id" });
+  WorkHours.belongsTo(models.Work,{ foreignKey: "work_id"});
+};
 
 //WorkHours.belongsTo(worker);
 //WorkHours.belongsTo(work);

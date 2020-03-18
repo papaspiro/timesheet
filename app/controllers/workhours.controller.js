@@ -5,18 +5,15 @@ const Work = db.work;
 
 const Op = db.Sequelize.Op;
 
-
 exports.create = (req, res) => {
 
     workhours = {
     date: req.body.date,
     hours: req.body.hours,
-    cworker_id: req.body.worker_id,
+    worker_id: req.body.worker_id,
     work_id:   req.body.work_id,
 
   }
-
-
 
 Workhours.create(workhours
   /*,
@@ -145,7 +142,7 @@ exports.getWorkhoursByCondition = (req,res) => {
      res.send(data);
    })
    .catch(err => {
-     res.status(500).send({
+     res.status(400).send({
        message:
          err.message || "Some error occurred while retrieving Workhours."
      });
@@ -159,18 +156,22 @@ exports.getAllWorkhours = (req, res) => {
       res.send(data);
     })
     .catch(err => {
-      res.status(500).send({
+      res.status(400).send({
         message:
           err.message || "Some error occurred while getting records."
       });
     });
 };
+/*
+exports.getMinPrice = () => Item.findAll({
+    attributes: [[sequelize.fn('min', sequelize.col('price')), 'minPrice']],
+  });
 
-
-
-
+*/
 //Associations
 exports.getByWorks = (req,res) => {
+  work_id = req.body.get('work_id');
+
 }
 
 exports.getByWork = (req,res) => {

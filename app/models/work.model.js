@@ -25,5 +25,10 @@ module.exports = (sequelize,Sequelize) => {
    underscored: true
   }
   );
+
+  Work.associate = (models) => {
+    Work.hasMany(models.Workhours,{foreignKey: "work_id"});
+  };
+
   return Work;
 }
